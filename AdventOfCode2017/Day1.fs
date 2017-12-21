@@ -5,10 +5,12 @@ open System.IO
 
 let input = File.ReadAllText(sprintf "%s\data\day1.txt" __SOURCE_DIRECTORY__)
 
-let digits = input.ToCharArray() |> Array.map (Char.GetNumericValue >> int)
+let digits = 
+    input.ToCharArray() 
+    |> Array.map (Char.GetNumericValue >> int) 
+    |> Array.rev
+
 let result = 
-    digits 
-    |> Array.mapi (fun i x -> (x, digits.[(i+1)%digits.Length]))
-    |> Array.filter (fun (x1, x2) -> x1 = x2)
-    |> Array.sumBy (fun (x1, _) -> x1)
+    let (_, sum) = digits |> Array.fold (fun (prev, sum) item -> (item, if prev=item then sum + item else sum)) (digits |> Array.last, 0)
+    sum
     
