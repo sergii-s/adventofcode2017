@@ -5,7 +5,8 @@ open System.IO
 
 let input = File.ReadAllLines(sprintf "%s\data\day5.txt" __SOURCE_DIRECTORY__)
 
-let modifyP1 offset = offset + 1
+let modifyP1 offset = 
+    offset + 1
 
 let modifyP2 offset =
     if offset >= 3 then
